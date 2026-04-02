@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex-Grid Maritime - Your Cargo Delivered. No Delays.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#071E3D',
+                        // secondary: '#1e3a5f',
+                        accent: '#f97316',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .modal {
+            display: none;
+        }
+        .modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-primary/95 backdrop-blur-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img class="w-[180px] h-[110px]" src="/images/main_logo.-removebg-preview.png" alt="apex-grid">
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-white hover:text-accent transition-colors">Home</a>
+                    <a href="#about" class="text-white hover:text-accent transition-colors">About Us</a>
+                    <a href="#services" class="text-white hover:text-accent transition-colors">Services</a>
+                    <a href="#why-us" class="text-white hover:text-accent transition-colors">Why Choose Us</a>
+                    <a href="#tracking" class="text-white hover:text-accent transition-colors">Tracking</a>
+                    <a href="#contact" class="text-white hover:text-accent transition-colors">Contact</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <button onclick="openModal()" class="bg-accent hover:bg-orange-600 text-white px-6 py-2.5 rounded-md font-semibold transition-all transform hover:scale-105">
+                        Get a Quote
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-primary border-t border-gray-700">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 text-white hover:bg-secondary rounded-md">Home</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 text-white hover:bg-secondary rounded-md">About Us</a>
+                <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 text-white hover:bg-secondary rounded-md">Services</a>
+                <a href="#why-us" onclick="toggleMobileMenu()" class="block px-3 py-2 text-white hover:bg-secondary rounded-md">Why Choose Us</a>
+                <a href="#tracking" onclick="toggleMobileMenu()" class="block px-3 py-2 text-white hover:bg-secondary rounded-md">Tracking</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 text-white hover:bg-secondary rounded-md">Contact</a>
+                <!-- <button onclick="openModal(); toggleMobileMenu()" class="w-full mt-4 bg-accent text-white px-6 py-3 rounded-md font-semibold">
+                    Get a Quote
+                </button> -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center bg-primary overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="/images/background url.PNG" 
+                 alt="Shipping Port" 
+                 class="w-full h-full object-cover opacity-150">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
+            <div class="max-w-2xl animate-slide-up">
+                <div class="text-accent font-semibold text-lg mb-2">YOUR CARGO DELIVERED.</div>
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    NO DELAYS.
+                </h1>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    Reliable clearing, forwarding and shipping <br> services across Nigeria and beyond. 
+                    <br>Fast, transparent and professional logistics you can trust.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="openModal()" class="bg-accent hover:bg-orange-600 text-white px-8 py-4 rounded-md font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                        Get a Quote <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <a href="#services" class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-md font-semibold transition-all flex items-center justify-center">
+                        Our Services
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-primary py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="flex items-center justify-center gap-4 scroll-reveal">
+                    <div class="text-accent text-4xl">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-bold text-2xl counter" data-target="1000">0</div>
+                        <div class="text-gray-400 text-sm">Shipments Delivered</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center gap-4 scroll-reveal">
+                    <div class="text-accent text-4xl">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-bold text-2xl">Nationwide</div>
+                        <div class="text-gray-400 text-sm">Coverage</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center gap-4 scroll-reveal">
+                    <div class="text-accent text-4xl">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-bold text-2xl">On-Time</div>
+                        <div class="text-gray-400 text-sm">Delivery</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center gap-4 scroll-reveal">
+                    <div class="text-accent text-4xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-bold text-2xl">Trusted by</div>
+                        <div class="text-gray-400 text-sm">Businesses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-12">
+                <div class="scroll-reveal">
+                    <div class="text-accent font-semibold mb-2">OUR SERVICES</div>
+                    <h2 class="text-4xl font-bold text-primary mb-4">Complete Logistics Solutions</h2>
+                    <p class="text-gray-600 text-lg">
+                        We handle every step of your cargo process with professionalism, speed and care.
+                    </p>
+                    <div class="w-20 h-1 bg-accent mt-6"></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 scroll-reveal group">
+                    <div class="bg-primary/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-clipboard-check text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Clearing</h3>
+                    <p class="text-gray-600 mb-4">
+                        Fast and accurate customs clearance with full compliance.
+                    </p>
+                    <a href="#" onclick="openModal()" class="text-accent font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 scroll-reveal group">
+                    <div class="bg-primary/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-box-open text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Forwarding</h3>
+                    <p class="text-gray-600 mb-4">
+                        Efficient movement of cargo from origin to destination.
+                    </p>
+                    <a href="#" onclick="openModal()" class="text-accent font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 scroll-reveal group">
+                    <div class="bg-primary/10 w-16 h-16 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent transition-colors">
+                        <i class="fas fa-ship text-3xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Shipping</h3>
+                    <p class="text-gray-600 mb-4">
+                        Reliable sea freight services with global shipping partners.
+                    </p>
+                    <a href="#" onclick="openModal()" class="text-accent font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-20 bg-primary">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                    <div class="text-accent font-semibold mb-2">WHY CHOOSE US</div>
+                    <h2 class="text-4xl font-bold text-white mb-4">We Deliver Excellence</h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Our clients trust us because we combine speed, transparency and professionalism in everything we do.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-8">
+                    <div class="flex flex-col items-center text-center p-6 scroll-reveal">
+                        <div class="text-accent text-5xl mb-4">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Fast & Reliable</h3>
+                        <p class="text-gray-400 text-sm">We deliver your cargo on time, every time.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 scroll-reveal">
+                        <div class="text-accent text-5xl mb-4">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Safe Handling</h3>
+                        <p class="text-gray-400 text-sm">Your goods are secure from start to finish.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 scroll-reveal">
+                        <div class="text-accent text-5xl mb-4">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Transparent Process</h3>
+                        <p class="text-gray-400 text-sm">Clear updates and honest communication always.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-6 scroll-reveal">
+                        <div class="text-accent text-5xl mb-4">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Extensive Network</h3>
+                        <p class="text-gray-400 text-sm">Strong local and global shipping connections.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-12">
+                <div class="scroll-reveal">
+                    <div class="text-accent font-semibold mb-2">HOW IT WORKS</div>
+                    <h2 class="text-4xl font-bold text-primary mb-4">Simple. Fast. Efficient.</h2>
+                    <div class="w-20 h-1 bg-accent mt-6"></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 relative">
+                <!-- Connecting Line -->
+                <div class="hidden md:block absolute top-1/4 left-0 w-full h-1 bg-gray-300 -z-10"></div>
+
+                <!-- Step 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-reveal">
+                    <div class="bg-accent text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">1</div>
+                    <div class="text-primary text-5xl mb-4">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Request a Quote</h3>
+                    <p class="text-gray-600">Send your shipment details through our form.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-reveal">
+                    <div class="bg-accent text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">2</div>
+                    <div class="text-primary text-5xl mb-4">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">We Process & Handle</h3>
+                    <p class="text-gray-600">Our team manages clearing, forwarding and shipping.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center scroll-reveal">
+                    <div class="bg-accent text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">3</div>
+                    <div class="text-primary text-5xl mb-4">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Cargo Delivered</h3>
+                    <p class="text-gray-600">Your goods arrive safely and on schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="tracking" class="py-20 bg-secondary">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center scroll-reveal">
+                <h2 class="text-3xl font-bold text-white mb-8">Track Your Shipment</h2>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input type="text" id="trackingNumber" placeholder="Enter tracking number" 
+                           class="flex-1 px-6 py-4 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                    <button onclick="trackShipment()" class="bg-accent hover:bg-orange-600 text-white px-8 py-4 rounded-md font-semibold transition-all">
+                        Track Now
+                    </button>
+                </div>
+                <div id="trackingResult" class="mt-8 hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-primary">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                    <div class="text-accent font-semibold mb-2">WHAT CLIENTS SAY</div>
+                    <div id="testimonialContainer" class="mt-6">
+                        <div class="testimonial-slide active">
+                            <i class="fas fa-quote-left text-accent text-4xl mb-4"></i>
+                            <p class="text-gray-300 text-lg mb-6">
+                                "Apex-Grid Maritime has consistently handled our shipments with speed and professionalism. Highly recommended!"
+                            </p>
+                            <div class="text-white font-semibold">— James Okoro, Operations Manager</div>
+                        </div>
+                        <div class="testimonial-slide hidden">
+                            <i class="fas fa-quote-left text-accent text-4xl mb-4"></i>
+                            <p class="text-gray-300 text-lg mb-6">
+                                "Outstanding service! They handled our customs clearing efficiently and our shipment arrived ahead of schedule."
+                            </p>
+                            <div class="text-white font-semibold">— Sarah Ahmed, Logistics Director</div>
+                        </div>
+                        <div class="testimonial-slide hidden">
+                            <i class="fas fa-quote-left text-accent text-4xl mb-4"></i>
+                            <p class="text-gray-300 text-lg mb-6">
+                                "The best logistics partner we've worked with. Their transparency and communication are exceptional."
+                            </p>
+                            <div class="text-white font-semibold">— Michael Chen, CEO</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mt-6">
+                        <button onclick="changeTestimonial(0)" class="testimonial-dot w-3 h-3 rounded-full bg-accent transition-all"></button>
+                        <button onclick="changeTestimonial(1)" class="testimonial-dot w-3 h-3 rounded-full bg-gray-600 transition-all"></button>
+                        <button onclick="changeTestimonial(2)" class="testimonial-dot w-3 h-3 rounded-full bg-gray-600 transition-all"></button>
+                    </div>
+                </div>
+
+                <div class="bg-secondary p-8 rounded-lg scroll-reveal">
+                    <div class="text-accent font-semibold mb-2">READY TO SHIP?</div>
+                    <h3 class="text-3xl font-bold text-white mb-4">Let's Move Your Cargo</h3>
+                    <p class="text-gray-400 mb-6">Get a fast, competitive quote today.</p>
+                    <button onclick="openModal()" class="bg-accent hover:bg-orange-600 text-white px-8 py-4 rounded-md font-semibold transition-all flex items-center gap-2">
+                        Get a Quote Now <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-primary border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img class="w-[180px] h-[110px]" src="/images/main_logo.-removebg-preview.png" alt="apex-grid">
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Your cargo delivered. No delays.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-accent transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-accent transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
+                        <li><a href="#tracking" class="hover:text-accent transition-colors">Tracking</a></li>
+                        <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-phone text-accent"></i>
+                            <span>070 7569 9037</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-phone text-accent"></i>
+                            <span>090 4299 4545</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fab fa-instagram text-accent"></i>
+                            <span>apexgrid_maritime</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-accent"></i>
+                            <span>Tradefair Complex, Lagos, Nigeria</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center text-white hover:bg-accent transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center text-white hover:bg-accent transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center text-white hover:bg-accent transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">© 2024 Apex-Grid Maritime. All Rights Reserved.</p>
+                <p class="text-gray-500 text-sm">Designed with excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal fixed inset-0 bg-black/70 z-50 items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-fade-in">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-primary">Get a Quote</h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="quoteForm" onsubmit="handleQuoteSubmit(event)">
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+                            <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                            <input type="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                            <input type="tel" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Company Name</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Service Type *</label>
+                            <select required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option value="">Select Service</option>
+                                <option value="clearing">Customs Clearing</option>
+                                <option value="forwarding">Freight Forwarding</option>
+                                <option value="shipping">Ocean/Air Shipping</option>
+                                <option value="logistics">Logistics Support</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Cargo Type</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option value="">Select Cargo Type</option>
+                                <option value="container">Container</option>
+                                <option value="bulk">Bulk Cargo</option>
+                                <option value="project">Project Cargo</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                        <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Tell us about your shipping needs..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-md font-semibold transition-all flex items-center justify-center gap-2">
+                        <span>Submit Request</span>
+                        <i class="fas fa-spinner fa-spin hidden" id="spinner"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('quoteModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('quoteModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('quoteModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Testimonial Slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+
+        function changeTestimonial(index) {
+            testimonials[currentTestimonial].classList.add('hidden');
+            testimonials[currentTestimonial].classList.remove('active');
+            dots[currentTestimonial].classList.remove('bg-accent');
+            dots[currentTestimonial].classList.add('bg-gray-600');
+
+            currentTestimonial = index;
+
+            testimonials[currentTestimonial].classList.remove('hidden');
+            testimonials[currentTestimonial].classList.add('active');
+            dots[currentTestimonial].classList.remove('bg-gray-600');
+            dots[currentTestimonial].classList.add('bg-accent');
+        }
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            let next = (currentTestimonial + 1) % testimonials.length;
+            changeTestimonial(next);
+        }, 5000);
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counter animation
+                    if (entry.target.querySelector('.counter')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 50;
+                let current = 0;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.innerText = Math.ceil(current) + '+';
+                        setTimeout(updateCounter, 30);
+                    } else {
+                        counter.innerText = target + '+';
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Track Shipment
+        function trackShipment() {
+            const trackingNum = document.getElementById('trackingNumber').value;
+            const resultDiv = document.getElementById('trackingResult');
+
+            if (!trackingNum) {
+                showToast('Please enter a tracking number', 'error');
+                return;
+            }
+
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `
+                <div class="bg-white p-6 rounded-lg text-left">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="text-xl font-bold text-primary">Tracking: ${trackingNum}</h4>
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm">In Transit</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            <span class="text-gray-700">Order Received - Lagos Port</span>
+                            <span class="text-gray-500 text-sm ml-auto">Jan 15</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            <span class="text-gray-700">Customs Cleared</span>
+                            <span class="text-gray-500 text-sm ml-auto">Jan 16</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
+                            <span class="text-primary font-semibold">In Transit to Destination</span>
+                            <span class="text-gray-500 text-sm ml-auto">Jan 17</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                            <span class="text-gray-400">Out for Delivery</span>
+                            <span class="text-gray-500 text-sm ml-auto">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Form Submission
+        function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const spinner = document.getElementById('spinner');
+            const btnText = btn.querySelector('span');
+
+            spinner.classList.remove('hidden');
+            btnText.textContent = 'Submitting...';
+
+            setTimeout(() => {
+                spinner.classList.add('hidden');
+                btnText.textContent = 'Submit Request';
+                closeModal();
+                showToast('Quote request submitted successfully! We will contact you soon.');
+                e.target.reset();
+            }, 2000);
+        }
+
+        // Toast Notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            if (type === 'error') {
+                toast.classList.remove('bg-green-500');
+                toast.classList.add('bg-red-500');
+            } else {
+                toast.classList.remove('bg-red-500');
+                toast.classList.add('bg-green-500');
+            }
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
